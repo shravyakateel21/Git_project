@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Your Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="result-container">
+
+        <div class="result-icon">
+            🏆
+        </div>
+
+        <p>TEST COMPLETED</p>
+
+        <h1>
+            Well done, {{ name }}!
+        </h1>
+
+        <div class="score">
+
+            <strong>{{ score }}</strong>
+
+            <span>/ {{ total }}</span>
+
+        </div>
+
+        <h2>
+            {{ percentage }}%
+        </h2>
+
+        {% if percentage >= 80 %}
+
+            <p class="message">
+                Excellent! 🎉 You have a strong aptitude.
+            </p>
+
+        {% elif percentage >= 50 %}
+
+            <p class="message">
+                Good job! Keep practicing. 💪
+            </p>
+
+        {% else %}
+
+            <p class="message">
+                Keep learning and try again! 📚
+            </p>
+
+        {% endif %}
+
+
+        <a href="/" class="again-button">
+            Take Test Again
+        </a>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,115 +1,142 @@
-from flask import Flask, render_template, request, jsonify
-import sqlite3
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 
-def get_db():
-    conn = sqlite3.connect("study.db")
-    conn.row_factory = sqlite3.Row
-    return conn
+questions = [
+
+    {
+        "question": "If 5 workers can complete a work in 10 days, how many days will 10 workers take?",
+
+        "options": [
+            "2 days",
+            "5 days",
+            "10 days",
+            "20 days"
+        ],
+
+        "answer": "5 days",
+
+        "solution": "More workers take less time. Total work = 5 × 10 = 50 worker-days. For 10 workers, time = 50 ÷ 10 = 5 days."
+    },
 
 
-def create_table():
-    conn = get_db()
+    {
+        "question": "What is 20% of 250?",
 
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS tasks (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            task TEXT NOT NULL,
-            completed INTEGER DEFAULT 0
-        )
-    """)
+        "options": [
+            "25",
+            "40",
+            "50",
+            "60"
+        ],
 
-    conn.commit()
-    conn.close()
+        "answer": "50",
+
+        "solution": "20% of 250 = (20 ÷ 100) × 250 = 50."
+    },
+
+
+    {
+        "question": "A train travels 120 km in 2 hours. What is its speed?",
+
+        "options": [
+            "40 km/h",
+            "50 km/h",
+            "60 km/h",
+            "80 km/h"
+        ],
+
+        "answer": "60 km/h",
+
+        "solution": "Speed = Distance ÷ Time. Therefore, Speed = 120 ÷ 2 = 60 km/h."
+    },
+
+
+    {
+        "question": "If the ratio of boys to girls is 2:3 and there are 20 boys, how many girls are there?",
+
+        "options": [
+            "20",
+            "25",
+            "30",
+            "35"
+        ],
+
+        "answer": "30",
+
+        "solution": "2 parts = 20 boys. Therefore, 1 part = 10. Girls = 3 parts = 3 × 10 = 30."
+    },
+
+
+    {
+        "question": "What is the average of 10, 20 and 30?",
+
+        "options": [
+            "15",
+            "20",
+            "25",
+            "30"
+        ],
+
+        "answer": "20",
+
+        "solution": "Average = Sum of values ÷ Number of values. (10 + 20 + 30) ÷ 3 = 60 ÷ 3 = 20."
+    }
+
+]
 
 
 @app.route("/")
 def home():
+
     return render_template("index.html")
 
 
-@app.route("/api/tasks", methods=["GET"])
-def get_tasks():
+@app.route("/test")
+def test():
 
-    conn = get_db()
+    name = request.args.get("name", "Student")
 
-    tasks = conn.execute(
-        "SELECT * FROM tasks ORDER BY id DESC"
-    ).fetchall()
-
-    conn.close()
-
-    return jsonify([dict(task) for task in tasks])
-
-
-@app.route("/api/tasks", methods=["POST"])
-def add_task():
-
-    data = request.get_json()
-
-    task = data.get("task", "").strip()
-
-    if task == "":
-        return jsonify({"error": "Task cannot be empty"}), 400
-
-    conn = get_db()
-
-    cursor = conn.execute(
-        "INSERT INTO tasks (task) VALUES (?)",
-        (task,)
+    return render_template(
+        "test.html",
+        name=name,
+        questions=questions
     )
 
-    conn.commit()
 
-    task_id = cursor.lastrowid
+@app.route("/submit", methods=["POST"])
+def submit():
 
-    conn.close()
+    name = request.form.get("name")
 
-    return jsonify({
-        "id": task_id,
-        "task": task,
-        "completed": 0
-    })
+    score = 0
+
+    for i, question in enumerate(questions):
+
+        user_answer = request.form.get(
+            f"question{i}"
+        )
+
+        if user_answer == question["answer"]:
+
+            score += 1
 
 
-@app.route("/api/tasks/<int:task_id>", methods=["PUT"])
-def update_task(task_id):
+    total = len(questions)
 
-    data = request.get_json()
+    percentage = (score / total) * 100
 
-    completed = data.get("completed", 0)
 
-    conn = get_db()
-
-    conn.execute(
-        "UPDATE tasks SET completed = ? WHERE id = ?",
-        (completed, task_id)
+    return render_template(
+        "result.html",
+        name=name,
+        score=score,
+        total=total,
+        percentage=percentage
     )
-
-    conn.commit()
-    conn.close()
-
-    return jsonify({"message": "Task updated"})
-
-
-@app.route("/api/tasks/<int:task_id>", methods=["DELETE"])
-def delete_task(task_id):
-
-    conn = get_db()
-
-    conn.execute(
-        "DELETE FROM tasks WHERE id = ?",
-        (task_id,)
-    )
-
-    conn.commit()
-    conn.close()
-
-    return jsonify({"message": "Task deleted"})
 
 
 if __name__ == "__main__":
-    create_table()
+
     app.run(debug=True)

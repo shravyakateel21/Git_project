@@ -1,217 +1,87 @@
-const taskInput = document.getElementById("taskInput");
-const addButton = document.getElementById("addButton");
-const taskList = document.getElementById("taskList");
+function showSolution(questionNumber, selectedAnswer, correctAnswer) {
 
+    const solution =
+        document.getElementById("solution" + questionNumber);
 
-// Load tasks when website opens
+    solution.style.display = "block";
 
-document.addEventListener("DOMContentLoaded", loadTasks);
 
-
-// Add button
-
-addButton.addEventListener("click", addTask);
-
-
-// Press Enter to add task
-
-taskInput.addEventListener("keypress", function(event) {
-
-    if (event.key === "Enter") {
-        addTask();
-    }
-
-});
-
-
-// GET TASKS
-
-async function loadTasks() {
-
-    const response = await fetch("/api/tasks");
-
-    const tasks = await response.json();
-
-    taskList.innerHTML = "";
-
-    tasks.forEach(task => {
-
-        displayTask(task);
-
-    });
-
-    updateStats(tasks);
-}
-
-
-// ADD TASK
-
-async function addTask() {
-
-    const text = taskInput.value.trim();
-
-    if (text === "") {
-
-        alert("Please enter a task.");
-
-        return;
-    }
-
-
-    const response = await fetch("/api/tasks", {
-
-        method: "POST",
-
-        headers: {
-            "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-            task: text
-        })
-
-    });
-
-
-    const task = await response.json();
-
-    displayTask(task);
-
-    taskInput.value = "";
-
-    loadTasks();
-}
-
-
-// DISPLAY TASK
-
-function displayTask(task) {
-
-    const div = document.createElement("div");
-
-    div.className = "task";
-
-    if (task.completed) {
-        div.classList.add("completed");
-    }
-
-
-    div.innerHTML = `
-
-        <input
-            type="checkbox"
-            class="check"
-            ${task.completed ? "checked" : ""}
-        >
-
-        <span class="task-text">
-            ${task.task}
-        </span>
-
-        <button class="delete">
-            Delete
-        </button>
-
-    `;
-
-
-    // COMPLETE TASK
-
-    const checkbox =
-        div.querySelector(".check");
-
-
-    checkbox.addEventListener("change", async function() {
-
-        const completed =
-            checkbox.checked ? 1 : 0;
-
-
-        await fetch(`/api/tasks/${task.id}`, {
-
-            method: "PUT",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                completed: completed
-            })
-
-        });
-
-
-        div.classList.toggle(
-            "completed",
-            checkbox.checked
+    // Get all options for this question
+    const options =
+        document.querySelectorAll(
+            'input[name="question' + questionNumber + '"]'
         );
 
-        loadTasks();
+
+    options.forEach(function(input) {
+
+        const label = input.parentElement;
+
+        label.style.background = "";
+        label.style.borderColor = "";
+
+
+        if (input.checked) {
+
+            if (selectedAnswer === correctAnswer) {
+
+                label.style.background = "#e8f8ee";
+                label.style.borderColor = "#28a745";
+
+            } else {
+
+                label.style.background = "#ffeaea";
+                label.style.borderColor = "#dc3545";
+
+            }
+
+        }
 
     });
 
-
-    // DELETE TASK
-
-    const deleteButton =
-        div.querySelector(".delete");
-
-
-    deleteButton.addEventListener("click", async function() {
-
-        await fetch(`/api/tasks/${task.id}`, {
-
-            method: "DELETE"
-
-        });
-
-
-        div.remove();
-
-        loadTasks();
-
-    });
-
-
-    taskList.appendChild(div);
 }
 
 
-// UPDATE STATISTICS
+/* TIMER */
 
-function updateStats(tasks) {
+let time = 5 * 60;
 
-    const total = tasks.length;
-
-    const completed =
-        tasks.filter(task => task.completed).length;
-
-    const pending =
-        total - completed;
+const timer = document.getElementById("timer");
 
 
-    document.getElementById(
-        "totalTasks"
-    ).textContent = total;
+if (timer) {
+
+    const countdown = setInterval(function() {
+
+        let minutes = Math.floor(time / 60);
+
+        let seconds = time % 60;
+
+        seconds =
+            seconds < 10
+            ? "0" + seconds
+            : seconds;
 
 
-    document.getElementById(
-        "completedTasks"
-    ).textContent = completed;
+        timer.textContent =
+            minutes + ":" + seconds;
 
 
-    document.getElementById(
-        "pendingTasks"
-    ).textContent = pending;
+        time--;
+
+
+        if (time < 0) {
+
+            clearInterval(countdown);
+
+            alert(
+                "Time is over! Your test will be submitted."
+            );
+
+            document.getElementById("testForm").submit();
+
+        }
+
+    }, 1000);
+
 }
-
-
-// DARK MODE
-
-document.getElementById("themeButton")
-    .addEventListener("click", function() {
-
-        document.body.classList.toggle("dark");
-
-    });

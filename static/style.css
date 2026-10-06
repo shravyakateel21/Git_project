@@ -6,306 +6,396 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f7f6ff;
-    color: #25233a;
-    transition: 0.3s;
+    background: #f5f3ff;
+    color: #242238;
 }
 
 
-/* NAVBAR */
+/* =========================
+   HOME PAGE
+========================= */
 
-nav {
-    height: 70px;
-    background: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 8%;
-
-    border-bottom: 1px solid #eee;
+.home-container {
+    max-width: 700px;
+    margin: 100px auto;
+    text-align: center;
+    padding: 30px;
 }
 
 .logo {
-    font-size: 24px;
+    font-size: 25px;
     font-weight: bold;
+    margin-bottom: 60px;
 }
 
 .logo span {
-    color: #6955e8;
+    color: #6c55e8;
 }
 
-#themeButton {
-    border: none;
-    background: #f0edff;
-
-    width: 40px;
-    height: 40px;
-
-    border-radius: 50%;
-
-    cursor: pointer;
-
-    font-size: 18px;
-}
-
-
-/* MAIN */
-
-main {
-    width: 90%;
-    max-width: 1000px;
-
-    margin: auto;
-}
-
-
-/* HERO */
-
-.hero {
-    padding: 70px 0 40px;
-}
-
-.tag {
-    color: #6955e8;
-    font-size: 13px;
-    font-weight: bold;
-
-    letter-spacing: 2px;
-
-    margin-bottom: 15px;
-}
-
-.hero h1 {
-    font-size: 48px;
+.home-container h1 {
+    font-size: 55px;
     line-height: 1.1;
 }
 
-.hero h1 span {
-    color: #6955e8;
+.home-container h1 span {
+    color: #6c55e8;
 }
 
-.subtitle {
+.home-container p {
     color: #777;
-    font-size: 17px;
-
-    margin-top: 20px;
-
-    max-width: 600px;
-
+    font-size: 18px;
     line-height: 1.6;
+    margin: 25px auto;
+    max-width: 550px;
+}
+
+.home-container form {
+    display: flex;
+    max-width: 500px;
+    margin: 30px auto;
+    gap: 10px;
+}
+
+.home-container input {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+.home-container button {
+    background: #6c55e8;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 50px;
+}
+
+.info div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info strong {
+    font-size: 25px;
+    color: #6c55e8;
+}
+
+.info span {
+    color: #888;
 }
 
 
-/* DASHBOARD */
+/* =========================
+   TEST PAGE
+========================= */
 
-.dashboard {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 20px;
-
-    margin-bottom: 40px;
+.test-container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 20px;
 }
 
-.stat {
+
+/* Header */
+
+.test-header {
+    background: white;
+    padding: 20px 25px;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.test-header h2 {
+    color: #6c55e8;
+}
+
+.test-header p {
+    color: #777;
+    margin-top: 5px;
+}
+
+
+/* Timer */
+
+.timer {
+    background: #eeeaff;
+    color: #6c55e8;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+
+/* Question */
+
+.question-card {
     background: white;
 
     padding: 25px;
 
     border-radius: 15px;
 
-    box-shadow:
-        0 5px 20px
-        rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
-.stat h3 {
-    font-size: 30px;
-    color: #6955e8;
-}
-
-.stat p {
-    color: #777;
-    margin-top: 5px;
-}
-
-
-/* TASK SECTION */
-
-.task-section {
-    background: white;
-
-    padding: 30px;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 5px 25px
-        rgba(0, 0, 0, 0.06);
-}
-
-.task-section h2 {
+.question-card h3 {
     margin-bottom: 20px;
+    line-height: 1.5;
 }
 
 
-/* INPUT */
+/* Options */
 
-.input-area {
-    display: flex;
-    gap: 10px;
-}
-
-#taskInput {
-    flex: 1;
+.option {
+    display: block;
 
     padding: 14px;
 
-    border: 1px solid #ddd;
+    margin-top: 10px;
 
-    border-radius: 9px;
+    border: 1px solid #e5e5e5;
 
-    font-size: 16px;
-
-    outline: none;
-}
-
-#taskInput:focus {
-    border-color: #6955e8;
-}
-
-#addButton {
-    background: #6955e8;
-
-    color: white;
-
-    border: none;
-
-    padding: 14px 22px;
-
-    border-radius: 9px;
+    border-radius: 8px;
 
     cursor: pointer;
 
-    font-weight: bold;
+    transition: 0.2s;
 }
 
-#addButton:hover {
-    background: #5140c5;
+.option:hover {
+    background: #f4f1ff;
+    border-color: #6c55e8;
+}
+
+.option input {
+    margin-right: 10px;
 }
 
 
-/* TASK */
+/* Selected option */
 
-.task {
-    margin-top: 15px;
+.option:has(input:checked) {
+    background: #eeeaff;
+    border-color: #6c55e8;
+}
 
-    padding: 15px;
 
-    border: 1px solid #eee;
+/* =========================
+   SOLUTION
+========================= */
+
+.solution {
+    margin-top: 20px;
+
+    padding: 18px 20px;
+
+    background: #f0edff;
+
+    border-left: 5px solid #6c55e8;
+
+    border-radius: 8px;
+
+    line-height: 1.6;
+}
+
+.solution strong {
+    display: block;
+
+    color: #6c55e8;
+
+    font-size: 17px;
+
+    margin-bottom: 7px;
+}
+
+.solution p {
+    color: #444;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+.submit-button {
+    display: block;
+
+    margin: 30px auto;
+
+    background: #6c55e8;
+
+    color: white;
+
+    padding: 15px 35px;
 
     border-radius: 10px;
 
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-}
-
-.task-text {
-    flex: 1;
-
     font-size: 16px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
 }
 
-.task.completed .task-text {
-    text-decoration: line-through;
+.submit-button:hover {
+    background: #5741d1;
 
-    color: #999;
-}
-
-.check {
-    width: 22px;
-    height: 22px;
-
-    cursor: pointer;
-}
-
-.delete {
-    border: none;
-
-    background: #ffe9e9;
-
-    color: #e53935;
-
-    padding: 7px 10px;
-
-    border-radius: 6px;
-
-    cursor: pointer;
-}
-
-.delete:hover {
-    background: #ffd5d5;
+    transform: translateY(-2px);
 }
 
 
-/* DARK MODE */
+/* =========================
+   RESULT PAGE
+========================= */
 
-.dark {
-    background: #171624;
+.result-container {
+    max-width: 600px;
+
+    margin: 100px auto;
+
+    background: white;
+
+    text-align: center;
+
+    padding: 50px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.result-icon {
+    font-size: 60px;
+}
+
+.result-container > p:first-of-type {
+    color: #6c55e8;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-top: 15px;
+}
+
+.result-container h1 {
+    margin-top: 15px;
+}
+
+.score {
+    margin: 30px 0 10px;
+}
+
+.score strong {
+    font-size: 65px;
+
+    color: #6c55e8;
+}
+
+.score span {
+    font-size: 25px;
+
+    color: #888;
+}
+
+.result-container h2 {
+    font-size: 35px;
+}
+
+.message {
+    color: #777;
+
+    margin: 15px 0 30px;
+}
+
+.again-button {
+    display: inline-block;
+
+    background: #6c55e8;
 
     color: white;
-}
 
-.dark nav,
-.dark .stat,
-.dark .task-section {
-    background: #242238;
+    text-decoration: none;
 
-    border-color: #333;
-}
+    padding: 14px 25px;
 
-.dark .subtitle,
-.dark .stat p {
-    color: #aaa;
-}
-
-.dark #taskInput {
-    background: #302d46;
-
-    color: white;
-
-    border-color: #444;
-}
-
-.dark .task {
-    border-color: #3b3852;
+    border-radius: 10px;
 }
 
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
 
-    .hero h1 {
-        font-size: 38px;
+    .home-container {
+        margin: 50px auto;
+        padding: 20px;
     }
 
-    .dashboard {
-        grid-template-columns: 1fr;
+    .home-container h1 {
+        font-size: 40px;
     }
 
-    .input-area {
+    .home-container form {
         flex-direction: column;
     }
 
-    #addButton {
-        width: 100%;
+    .info {
+        gap: 25px;
     }
+
+    .test-container {
+        padding: 10px;
+    }
+
+    .test-header {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+    .question-card {
+        padding: 20px;
+    }
+
+    .result-container {
+        margin: 50px 15px;
+
+        padding: 35px 20px;
+    }
+
 }

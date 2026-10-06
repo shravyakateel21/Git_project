@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Aptitude Test</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+    <div class="test-container">
+
+
+        <!-- HEADER -->
+
+        <div class="test-header">
+
+            <div>
+
+                <h2>AptiTest</h2>
+
+                <p>
+                    Hello, {{ name }} 👋
+                </p>
+
+            </div>
+
+
+            <div class="timer">
+
+                ⏱️ <span id="timer">05:00</span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TEST -->
+
+        <form
+            action="/submit"
+            method="POST"
+            id="testForm"
+        >
+
+
+            <!-- SEND NAME TO FLASK -->
+
+            <input
+                type="hidden"
+                name="name"
+                value="{{ name }}"
+            >
+
+
+
+            <!-- QUESTIONS -->
+
+            {% for question in questions %}
+
+            {% set question_number = loop.index0 %}
+
+
+            <div class="question-card">
+
+
+                <!-- QUESTION -->
+
+                <h3>
+
+                    {{ loop.index }}.
+                    {{ question.question }}
+
+                </h3>
+
+
+
+                <!-- OPTIONS -->
+
+                {% for option in question.options %}
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="question{{ question_number }}"
+                        value="{{ option }}"
+                        onclick="showSolution(
+                            {{ question_number }},
+                            '{{ option }}',
+                            '{{ question.answer }}'
+                        )"
+                    >
+
+                    {{ option }}
+
+                </label>
+
+                {% endfor %}
+
+
+
+                <!-- SOLUTION -->
+
+                <div
+                    id="solution{{ question_number }}"
+                    class="solution"
+                    style="display: none;"
+                >
+
+                    <strong>
+                        Solution:
+                    </strong>
+
+                    <p>
+                        {{ question.solution }}
+                    </p>
+
+                </div>
+
+
+            </div>
+
+            {% endfor %}
+
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="submit-button"
+            >
+
+                Submit Test
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+
+</html>

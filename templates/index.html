@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Study Planner</title>
+    <title>AptiTest</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
@@ -17,89 +17,57 @@
 
 <body>
 
-    <nav>
+    <div class="home-container">
 
         <div class="logo">
-            Study<span>Planner</span>
+            Apti<span>Test</span>
         </div>
 
-        <button id="themeButton">
-            🌙
-        </button>
+        <h1>
+            Test Your<br>
+            <span>Aptitude Skills</span>
+        </h1>
 
-    </nav>
+        <p>
+            Practice quantitative aptitude, logical reasoning
+            and problem-solving skills.
+        </p>
 
+        <form action="/test" method="GET">
 
-    <main>
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required
+            >
 
-        <section class="hero">
+            <button type="submit">
+                Start Test →
+            </button>
+
+        </form>
+
+        <div class="info">
 
             <div>
-
-                <p class="tag">MY PRODUCTIVITY SPACE</p>
-
-                <h1>
-                    Plan your study.<br>
-                    <span>Achieve your goals.</span>
-                </h1>
-
-                <p class="subtitle">
-                    Add your study tasks and keep track of
-                    your progress every day.
-                </p>
-
+                <strong>5</strong>
+                <span>Questions</span>
             </div>
 
-        </section>
-
-
-        <section class="dashboard">
-
-            <div class="stat">
-                <h3 id="totalTasks">0</h3>
-                <p>Total Tasks</p>
+            <div>
+                <strong>5</strong>
+                <span>Minutes</span>
             </div>
 
-            <div class="stat">
-                <h3 id="completedTasks">0</h3>
-                <p>Completed</p>
+            <div>
+                <strong>100%</strong>
+                <span>Free</span>
             </div>
 
-            <div class="stat">
-                <h3 id="pendingTasks">0</h3>
-                <p>Pending</p>
-            </div>
+        </div>
 
-        </section>
-
-
-        <section class="task-section">
-
-            <h2>Today's Tasks</h2>
-
-            <div class="input-area">
-
-                <input
-                    type="text"
-                    id="taskInput"
-                    placeholder="What do you need to study?"
-                >
-
-                <button id="addButton">
-                    + Add Task
-                </button>
-
-            </div>
-
-
-            <div id="taskList"></div>
-
-        </section>
-
-    </main>
-
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </div>
 
 </body>
 
