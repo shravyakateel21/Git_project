@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Study Planner</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            Study<span>Planner</span>
+        </div>
+
+        <button id="themeButton">
+            🌙
+        </button>
+
+    </nav>
+
+
+    <main>
+
+        <section class="hero">
+
+            <div>
+
+                <p class="tag">MY PRODUCTIVITY SPACE</p>
+
+                <h1>
+                    Plan your study.<br>
+                    <span>Achieve your goals.</span>
+                </h1>
+
+                <p class="subtitle">
+                    Add your study tasks and keep track of
+                    your progress every day.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="dashboard">
+
+            <div class="stat">
+                <h3 id="totalTasks">0</h3>
+                <p>Total Tasks</p>
+            </div>
+
+            <div class="stat">
+                <h3 id="completedTasks">0</h3>
+                <p>Completed</p>
+            </div>
+
+            <div class="stat">
+                <h3 id="pendingTasks">0</h3>
+                <p>Pending</p>
+            </div>
+
+        </section>
+
+
+        <section class="task-section">
+
+            <h2>Today's Tasks</h2>
+
+            <div class="input-area">
+
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="What do you need to study?"
+                >
+
+                <button id="addButton">
+                    + Add Task
+                </button>
+
+            </div>
+
+
+            <div id="taskList"></div>
+
+        </section>
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

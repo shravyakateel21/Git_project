@@ -1,0 +1,311 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f6ff;
+    color: #25233a;
+    transition: 0.3s;
+}
+
+
+/* NAVBAR */
+
+nav {
+    height: 70px;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 8%;
+
+    border-bottom: 1px solid #eee;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #6955e8;
+}
+
+#themeButton {
+    border: none;
+    background: #f0edff;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+
+/* MAIN */
+
+main {
+    width: 90%;
+    max-width: 1000px;
+
+    margin: auto;
+}
+
+
+/* HERO */
+
+.hero {
+    padding: 70px 0 40px;
+}
+
+.tag {
+    color: #6955e8;
+    font-size: 13px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    line-height: 1.1;
+}
+
+.hero h1 span {
+    color: #6955e8;
+}
+
+.subtitle {
+    color: #777;
+    font-size: 17px;
+
+    margin-top: 20px;
+
+    max-width: 600px;
+
+    line-height: 1.6;
+}
+
+
+/* DASHBOARD */
+
+.dashboard {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 40px;
+}
+
+.stat {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.05);
+}
+
+.stat h3 {
+    font-size: 30px;
+    color: #6955e8;
+}
+
+.stat p {
+    color: #777;
+    margin-top: 5px;
+}
+
+
+/* TASK SECTION */
+
+.task-section {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 25px
+        rgba(0, 0, 0, 0.06);
+}
+
+.task-section h2 {
+    margin-bottom: 20px;
+}
+
+
+/* INPUT */
+
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+#taskInput {
+    flex: 1;
+
+    padding: 14px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 9px;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+#taskInput:focus {
+    border-color: #6955e8;
+}
+
+#addButton {
+    background: #6955e8;
+
+    color: white;
+
+    border: none;
+
+    padding: 14px 22px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+#addButton:hover {
+    background: #5140c5;
+}
+
+
+/* TASK */
+
+.task {
+    margin-top: 15px;
+
+    padding: 15px;
+
+    border: 1px solid #eee;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.task-text {
+    flex: 1;
+
+    font-size: 16px;
+}
+
+.task.completed .task-text {
+    text-decoration: line-through;
+
+    color: #999;
+}
+
+.check {
+    width: 22px;
+    height: 22px;
+
+    cursor: pointer;
+}
+
+.delete {
+    border: none;
+
+    background: #ffe9e9;
+
+    color: #e53935;
+
+    padding: 7px 10px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+.delete:hover {
+    background: #ffd5d5;
+}
+
+
+/* DARK MODE */
+
+.dark {
+    background: #171624;
+
+    color: white;
+}
+
+.dark nav,
+.dark .stat,
+.dark .task-section {
+    background: #242238;
+
+    border-color: #333;
+}
+
+.dark .subtitle,
+.dark .stat p {
+    color: #aaa;
+}
+
+.dark #taskInput {
+    background: #302d46;
+
+    color: white;
+
+    border-color: #444;
+}
+
+.dark .task {
+    border-color: #3b3852;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .input-area {
+        flex-direction: column;
+    }
+
+    #addButton {
+        width: 100%;
+    }
+}
